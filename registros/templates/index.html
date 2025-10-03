@@ -1,0 +1,18 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Página principal {% endblock %}
+
+{% block content %}
+    <h1>Torneo de copa</h1>
+
+    <ul>
+        {% for equipo in equipos %}
+            <a href="{% url 'equipo' equipo.id%}">{{ equipo.nombre }}</a>
+        {% empty %}
+            <li>No hay equipos registrados</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'registrar_equipo' %}">Registrar Nuevo Equipo</a>
+
+{% endblock %}

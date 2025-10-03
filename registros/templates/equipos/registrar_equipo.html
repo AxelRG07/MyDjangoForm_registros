@@ -1,0 +1,15 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Nuevo Equipo {% endblock %}
+
+{% block content %}
+    <h2>Registrar Nuevo Equipo</h2>
+    <form method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Registrar Equipo</button>
+
+    </form>
+{% endblock %}

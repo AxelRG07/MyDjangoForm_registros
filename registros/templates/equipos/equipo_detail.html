@@ -1,0 +1,22 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Detalles Equipo {% endblock %}
+
+{% block content %}
+    <h1>Detalles del Equipo: {{ equipo.nombre }}</h1>
+    {% if equipo.logo %}
+        <img src="{{ equipo.logo.url }}" alt="{{ equipo.nombre }}">
+    {% endif %}
+
+    <h2>Jugadores:</h2>
+    <ul>
+        {% for jugador in equipo.jugador_set.all %}
+            <li>{{ jugador.nombre }}</li>
+        {% empty %}
+            <li>Aún no hay jugadores registrados.</li>
+        {% endfor %}
+    </ul>
+
+    <a>Registrar nuevo jugador</a>
+
+{% endblock %}
