@@ -20,8 +20,8 @@ def registrar_equipo(request):
         'form': form,
     })
 
-def registrar_jugador(request, id):
-    equipo = get_object_or_404(Equipo, pk=id)
+def registrar_jugador(request, id_equipo):
+    equipo = get_object_or_404(Equipo, pk=id_equipo)
     if request.method == 'POST':
         form = JugadorForm(request.POST, request.FILES)
         if form.is_valid():
@@ -29,7 +29,7 @@ def registrar_jugador(request, id):
             nuevo_jugador.equipo = equipo
             nuevo_jugador.save()
 
-            return redirect('equipo', id=id)
+            return redirect('equipo', id_equipo=id_equipo)
     else:
         form = JugadorForm()
 
@@ -38,14 +38,26 @@ def registrar_jugador(request, id):
         'equipo': equipo,
     })
 
-def equipo_detalle(request, id):
-    equipo = get_object_or_404(Equipo, pk=id)
+def equipo_detalle(request, id_equipo):
+    equipo = get_object_or_404(Equipo, pk=id_equipo)
     return render(request, 'equipos/equipo_detail.html', {
         'equipo': equipo,
     })
 
-def jugador_detalle(request, id):
-    jugador = get_object_or_404(Jugador, pk=id)
+def jugador_detalle(request, id_jugador):
+    jugador = get_object_or_404(Jugador, pk=id_jugador)
     return render(request, 'jugadores/jugador_detail.html', {
         'jugador': jugador,
     })
+
+def eliminar_jugador(request, id_jugador):
+    jugador = get_object_or_404(Jugador, pk=id_jugador)
+    if request.method == 'POST':
+        id_equipo = jugador.equipo.id
+        jugador.delete()
+        return redirect('equipo', id_equipo=id_equipo)
+
+    else:
+        return render(request, 'jugadores/eliminar_jugador.html', {
+            'jugador': jugador,
+        })

@@ -13,6 +13,16 @@ class EquipoForm(forms.ModelForm):
         }
 
 class JugadorForm(forms.ModelForm):
+    identificacion_pdf = forms.FileField(
+        label="Identificacion (PDF)",
+        validators=[
+            FileExtensionValidator(
+                allowed_extensions=['pdf'],
+                message='Error: Solo se permiten archivos en formato PDF.'
+            )
+        ]
+    )
+
     class Meta:
         model = Jugador
         fields = ['nombre', 'foto', 'identificacion_pdf']

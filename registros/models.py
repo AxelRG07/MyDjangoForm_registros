@@ -16,3 +16,11 @@ class Jugador(models.Model):
 
     def __str__(self):
         return f'{self.nombre} - {self.equipo.nombre}'
+
+    def delete(self, *args, **kwargs):
+        if self.foto:
+            self.foto.delete()
+        if self.identificacion_pdf:
+            self.identificacion_pdf.delete()
+
+        super().delete(*args, **kwargs)

@@ -25,7 +25,7 @@
     {% endif %}
 
     <a href="">Editar</a>
-    <a href="">Eliminar</a>
+    <a href="{% url 'eliminar_jugador' id_jugador=jugador.id %}">Eliminar</a>
     <a href="{% url 'equipo' jugador.equipo.id %}">Volver</a>
 
 {% endblock %}

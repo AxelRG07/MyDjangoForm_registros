@@ -1,0 +1,12 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Eliminar Jugador {% endblock %}
+
+{% block content %}
+    <h1>Estas a punto de eliminar al jugador: {{ jugador.nombre }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Eliminar</button>
+        <a href="{% url 'equipo' jugador.equipo.id %}">Cancelar</a>
+    </form>
+{% endblock %}
