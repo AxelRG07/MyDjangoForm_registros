@@ -20,8 +20,8 @@ def registrar_equipo(request):
         'form': form,
     })
 
-def registrar_jugador(request, equipo_id):
-    equipo = get_object_or_404(Equipo, pk=equipo_id)
+def registrar_jugador(request, id):
+    equipo = get_object_or_404(Equipo, pk=id)
     if request.method == 'POST':
         form = JugadorForm(request.POST, request.FILES)
         if form.is_valid():
@@ -29,7 +29,7 @@ def registrar_jugador(request, equipo_id):
             nuevo_jugador.equipo = equipo
             nuevo_jugador.save()
 
-            return redirect('detalle_equipo', equipo_id=equipo_id)
+            return redirect('equipo', id=id)
     else:
         form = JugadorForm()
 
@@ -42,4 +42,10 @@ def equipo_detalle(request, id):
     equipo = get_object_or_404(Equipo, pk=id)
     return render(request, 'equipos/equipo_detail.html', {
         'equipo': equipo,
+    })
+
+def jugador_detalle(request, id):
+    jugador = get_object_or_404(Jugador, pk=id)
+    return render(request, 'jugadores/jugador_detail.html', {
+        'jugador': jugador,
     })

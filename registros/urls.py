@@ -5,4 +5,6 @@ urlpatterns = [
     path('', index, name='index'),
     path('equipo/add/', registrar_equipo, name='registrar_equipo'),
     path('equipo/<int:id>/', equipo_detalle, name='equipo'),
+    path('equipo/<int:id>/registrar-jugador', registrar_jugador, name='registrar_jugador'),
+    path('jugador/<int:id>/', jugador_detalle, name='jugador'),
 ]

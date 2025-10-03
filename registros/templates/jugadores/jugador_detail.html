@@ -1,0 +1,31 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Detalles Jugador {% endblock %}
+
+{% block content %}
+    <h1>Detalles del Jugador: {{ jugador.nombre }}</h1>
+    <h2>Equipo: {{ jugador.equipo.nombre }}</h2>
+
+    <h2>Documentos:</h2>
+
+    {% if jugador.foto %}
+        <p>
+            <strong>Foto:</strong><br>
+            <img src="{{ jugador.foto.url }}" alt="Foto de {{ jugador.nombre_completo }}" width="200">
+        </p>
+    {% endif %}
+
+    {% if jugador.identificacion_pdf %}
+        <p>
+            <strong>Identificación:</strong><br>
+            <a href="{{ jugador.identificacion_pdf.url }}" target="_blank">
+                Ver/Descargar PDF
+            </a>
+        </p>
+    {% endif %}
+
+    <a href="">Editar</a>
+    <a href="">Eliminar</a>
+    <a href="{% url 'equipo' jugador.equipo.id %}">Volver</a>
+
+{% endblock %}

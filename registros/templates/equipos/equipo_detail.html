@@ -11,12 +11,12 @@
     <h2>Jugadores:</h2>
     <ul>
         {% for jugador in equipo.jugador_set.all %}
-            <li>{{ jugador.nombre }}</li>
+            <a href="{% url 'jugador' jugador.id%}">{{ jugador.nombre }}</a>
         {% empty %}
             <li>Aún no hay jugadores registrados.</li>
         {% endfor %}
     </ul>
 
-    <a>Registrar nuevo jugador</a>
-
+    <a href="{% url 'registrar_jugador' id=equipo.id %}">Registrar nuevo jugador</a>
+    <a href="{% url 'index' %}">Regresar al inicio</a>
 {% endblock %}

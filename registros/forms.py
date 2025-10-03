@@ -15,7 +15,7 @@ class EquipoForm(forms.ModelForm):
 class JugadorForm(forms.ModelForm):
     class Meta:
         model = Jugador
-        fields = ['nombre', 'foto', 'identifacion_pdf']
+        fields = ['nombre', 'foto', 'identificacion_pdf']
 
         widgets = {
             'nombre': forms.TextInput(attrs={'class':'form-control'}),
