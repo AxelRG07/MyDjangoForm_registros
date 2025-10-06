@@ -17,6 +17,6 @@
         {% endfor %}
     </ul>
 
-    <a href="{% url 'registrar_jugador' id=equipo.id %}">Registrar nuevo jugador</a>
+    <a href="{% url 'registrar_jugador' equipo.id %}">Registrar nuevo jugador</a>
     <a href="{% url 'index' %}">Regresar al inicio</a>
 {% endblock %}

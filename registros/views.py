@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import EquipoForm, JugadorForm
 from .models import Equipo, Jugador
-
+import os
 
 # Create your views here.
 def index(request):
@@ -61,3 +61,28 @@ def eliminar_jugador(request, id_jugador):
         return render(request, 'jugadores/eliminar_jugador.html', {
             'jugador': jugador,
         })
+
+def actualizar_jugador(request, id_jugador):
+    jugador = get_object_or_404(Jugador, pk=id_jugador)
+    foto_path = jugador.foto.path if jugador.foto.path else None
+    pdf_path = jugador.identificacion_pdf.path if jugador.identificacion_pdf.path else None
+
+    if request.method == 'POST':
+        form = JugadorForm(request.POST, request.FILES, instance=jugador)
+        if form.is_valid():
+            if 'foto' in request.FILES and foto_path:
+                if os.path.exists(foto_path):
+                    os.remove(foto_path)
+
+            if 'identificacion_pdf' in request.FILES and pdf_path:
+                if os.path.exists(pdf_path):
+                    os.remove(pdf_path)
+
+            form.save()
+            return redirect('jugador', id_jugador=id_jugador)
+    else:
+        form = JugadorForm(instance=jugador)
+    return render(request, 'jugadores/registrar_jugador.html', {
+        'form': form,
+        'jugador': jugador,
+    })
